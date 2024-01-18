@@ -1,10 +1,18 @@
 namespace Samples.Solid.OCP;
 
+public enum AccountTypes
+{
+    Checking,
+    Saving
+}
+
 public class BankAccount
 {
     private List<Transaction> _transactions = new();
 
     public double Balance { get; set; } = 0;
+    public AccountTypes AccountType { get; set; } = AccountTypes.Checking;
+    public decimal InterestRate { get; set; }
 
     public IReadOnlyList<Transaction> Transactions
     {
@@ -23,7 +31,25 @@ public class BankAccount
     }
 
     private void UpdateBalance()
-        => Balance = _transactions.Sum(x => x.Amount);
+    {
+        if (AccountType == AccountTypes.Checking)
+        {
+            Balance = _transactions.Sum(x => x.Amount);
+        }
+        else
+        {
+            Balance = 0;
+
+            foreach (var transaction in _transactions)
+            {
+                Balance += transaction.Amount;
+                Balance += CalculateInterest(transaction.Amount, transaction.CreatedAt, InterestRate);
+            }
+        }
+    }
+
+    private double CalculateInterest(double transactionAmount, DateTime transactionCreatedAt, decimal interestRate)
+        => 0;
 }
 
 public class Transaction
