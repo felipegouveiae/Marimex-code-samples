@@ -1,10 +1,13 @@
 namespace Samples.Solid.OCP.Implementations;
 
-public class BankCheckingAccount
+public abstract class AbstractBankAccount
+{
+    public double Balance { get; set; } = 0;
+}
+
+public class AbstractBankCheckingAccount : AbstractBankAccount
 {
     private List<Transaction> _transactions = new();
-
-    public double Balance { get; set; } = 0;
 
     public IReadOnlyList<Transaction> Transactions
     {
@@ -26,7 +29,7 @@ public class BankCheckingAccount
         => Balance = _transactions.Sum(x => x.Amount);
 }
 
-public class BankSavingsAccount : BankCheckingAccount
+public class AbstractBankSavingsAccount : AbstractBankCheckingAccount
 {
     public decimal InterestRate { get; set; }
 
@@ -51,7 +54,7 @@ public class BankSavingsAccount : BankCheckingAccount
     }
 }
 
-public class BankInvestingAccount : BankSavingsAccount
+public class AbstractBankInvestingAccount : AbstractBankSavingsAccount
 {
     public decimal InvestingInterestRate { get; set; }
 

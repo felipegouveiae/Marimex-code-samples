@@ -4,13 +4,13 @@ namespace Samples.Solid.LSP;
 
 public class LiskovSample
 {
-    private readonly List<BankCheckingAccount> _accounts = new();
+    private readonly List<AbstractBankCheckingAccount> _accounts = new();
 
     public double ConsolidateBalance()
     {
-        var checkingAccount = new BankCheckingAccount();
-        var savingsAccount = new BankSavingsAccount();
-        var investingAccount = new BankInvestingAccount();
+        var checkingAccount = new AbstractBankCheckingAccount();
+        var savingsAccount = new AbstractBankSavingsAccount();
+        var investingAccount = new AbstractBankInvestingAccount();
         var mortgageAccount= new MortgageAccount();
 
         _accounts.Add(checkingAccount);
