@@ -1,9 +1,10 @@
-namespace Samples.Solid.OCP;
+namespace Samples.Solid.OCP.Violations;
 
 public enum AccountTypes
 {
     Checking,
-    Saving
+    Saving,
+    Investing,
 }
 
 public class BankAccount
@@ -13,6 +14,7 @@ public class BankAccount
     public double Balance { get; set; } = 0;
     public AccountTypes AccountType { get; set; } = AccountTypes.Checking;
     public decimal InterestRate { get; set; }
+    public decimal InvestingInterestRate { get; set; }
 
     public IReadOnlyList<Transaction> Transactions
     {
@@ -36,7 +38,7 @@ public class BankAccount
         {
             Balance = _transactions.Sum(x => x.Amount);
         }
-        else
+        else if (AccountType == AccountTypes.Saving)
         {
             Balance = 0;
 
@@ -44,6 +46,16 @@ public class BankAccount
             {
                 Balance += transaction.Amount;
                 Balance += CalculateInterest(transaction.Amount, transaction.CreatedAt, InterestRate);
+            }
+        }
+        else if (AccountType == AccountTypes.Investing)
+        {
+            Balance = 0;
+
+            foreach (var transaction in _transactions)
+            {
+                Balance += transaction.Amount;
+                Balance += CalculateInterest(transaction.Amount, transaction.CreatedAt, InvestingInterestRate);
             }
         }
     }
