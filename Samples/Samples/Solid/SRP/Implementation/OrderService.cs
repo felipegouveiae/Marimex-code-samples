@@ -30,6 +30,7 @@ public class OrderService
         
         return new PlacedOrderDetails(order);
     }
+
     #region ...
     
     private readonly IProductRepository _productRepository;
