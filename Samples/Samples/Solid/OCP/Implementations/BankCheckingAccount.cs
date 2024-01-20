@@ -5,7 +5,7 @@ public abstract class AbstractBankAccount
     public double Balance { get; set; } = 0;
 }
 
-public class AbstractBankCheckingAccount : AbstractBankAccount
+public class BankCheckingAccount : AbstractBankAccount
 {
     private List<Transaction> _transactions = new();
 
@@ -29,7 +29,7 @@ public class AbstractBankCheckingAccount : AbstractBankAccount
         => Balance = _transactions.Sum(x => x.Amount);
 }
 
-public class AbstractBankSavingsAccount : AbstractBankCheckingAccount
+public class BankSavingsAccount : BankCheckingAccount
 {
     public decimal InterestRate { get; set; }
 
@@ -54,7 +54,7 @@ public class AbstractBankSavingsAccount : AbstractBankCheckingAccount
     }
 }
 
-public class AbstractBankInvestingAccount : AbstractBankSavingsAccount
+public class BankInvestingAccount : BankSavingsAccount
 {
     public decimal InvestingInterestRate { get; set; }
 

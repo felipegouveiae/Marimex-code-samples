@@ -1,0 +1,21 @@
+version: "3"
+services:
+  db:
+    container_name: marimex_db
+    image: mariadb:10.9.4
+    ports:
+      - '3309:3306'
+    environment:
+      MYSQL_DATABASE: 'marimex'
+      MYSQL_ROOT_PASSWORD: '123'
+
+  mailtrap:
+    container_name: marimex_mailtrap
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025" # smtp server
+      - "8025:8025" # web ui
+
+
+
+

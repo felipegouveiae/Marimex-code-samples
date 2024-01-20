@@ -2,7 +2,7 @@ using Samples.Solid.OCP.Implementations;
 
 namespace Samples.Solid.LSP;
 
-public class MortgageAccount : AbstractBankCheckingAccount
+public class MortgageAccount : BankCheckingAccount
 {
     public new double Balance
     {

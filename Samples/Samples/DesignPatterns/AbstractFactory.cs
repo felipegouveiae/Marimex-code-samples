@@ -9,9 +9,9 @@ public class BankAccountAbstractFactory
         switch (client.ClientType)
         {
             case ClientTypes.Company:
-                return new AbstractBankInvestingAccount();
+                return new BankInvestingAccount();
             case ClientTypes.Person:
-                return new AbstractBankCheckingAccount();
+                return new BankCheckingAccount();
             default:
                 throw new UnsupportedClientTypeException();
         }
